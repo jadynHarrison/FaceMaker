@@ -2,6 +2,7 @@ package facemakerver02.up.edu;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private FaceModel myModel;
+
+    //values for the hairstyle spinner
     String[] hairstyles = {
             "Ponytail",
             "Braid",
@@ -35,5 +38,15 @@ public class MainActivity extends AppCompatActivity {
         TextView greenValue = findViewById(R.id.greenValue);
         TextView blueValue = findViewById(R.id.blueValue);
         FaceController fixYourFace = new FaceController(myModel, redValue, greenValue, blueValue);
+
+        //seekbar listeners
+        SeekBar redBar = findViewById(R.id.redBar);
+        redBar.setOnSeekBarChangeListener(fixYourFace);
+
+        SeekBar greenBar = findViewById(R.id.greenBar);
+        greenBar.setOnSeekBarChangeListener(fixYourFace);
+
+        SeekBar blueBar = findViewById(R.id.blueBar);
+        blueBar.setOnSeekBarChangeListener(fixYourFace);
     }
 }

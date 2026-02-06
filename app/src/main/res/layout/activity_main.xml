@@ -5,26 +5,22 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-
-    <LinearLayout
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/left_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:orientation="vertical"
             android:padding="50dp">
 
             <LinearLayout
+                android:id="@+id/topLeft_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
@@ -52,7 +48,7 @@
             </LinearLayout>
 
             <SeekBar
-                android:id="@+id/seekBar"
+                android:id="@+id/redBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -86,7 +82,7 @@
             </LinearLayout>
 
             <SeekBar
-                android:id="@+id/seekBar2"
+                android:id="@+id/greenBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -119,7 +115,7 @@
             </LinearLayout>
 
             <SeekBar
-                android:id="@+id/seekBar3"
+                android:id="@+id/blueBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -128,6 +124,7 @@
 
 
             <LinearLayout
+                android:id="@+id/bottonLeft_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -175,7 +172,7 @@
                 <Button
                     android:id="@+id/randomFaceButton"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:padding="20dp"
                     android:text="Random Face"
                     android:textSize="20sp" />
@@ -185,9 +182,10 @@
 
 
         <LinearLayout
+            android:id="@+id/avatarRight_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="0"
             android:orientation="vertical"
             android:padding="50dp">
 

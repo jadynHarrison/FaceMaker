@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+//this will be more useful later on. I don't want to start from scratch later. it's a work in progress
 public class FaceController implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private FaceModel myModel;
 
@@ -25,7 +26,8 @@ public class FaceController implements View.OnClickListener, SeekBar.OnSeekBarCh
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        this.redValue.setText("" + progress);
+        //which SeekBar triggered the listener?
+        //update the TextView
     }
 
     @Override
