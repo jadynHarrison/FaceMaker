@@ -1,46 +1,44 @@
 package facemakerver02.up.edu;
-import android.graphics.Canvas;
+
+/**
+ * @author Jadyn Harrison
+ */
+
 import android.util.Log;
 
 import java.util.Random;
 public class FaceModel {
     //declare variables
-    public int skinColor;
-    public int eyeColor;
-    public int hairColor;
-    public int hairStyle;
+    public int _skinRedValue = 0;
+    public int _skinGreenValue = 0;
+    public int _skinBlueValue = 0;
+    public int _eyesRedValue = 0;
+    public int _eyesGreenValue = 0;
+    public int _eyesBlueValue = 0;
+    public int _hairRedValue = 0;
+    public int _hairGreenValue = 0;
+    public int _hairBlueValue = 0;
+    public int hairStyle = 0;
     public FaceModel() {
         randomize();
     }
 
+    /**
+     * Randomizes the hair, skin, and eye colors of the avatar
+     */
     public void randomize() {
-        Log.d("candles", "let's get lit");
         Random random = new Random();
-        skinColor = random.nextInt(256);
-        eyeColor = random.nextInt(256);
-        hairColor = random.nextInt(256);
+        _skinRedValue = random.nextInt(256);
+        _skinGreenValue = random.nextInt(256);
+        _skinBlueValue = random.nextInt(256);
+        _eyesRedValue = random.nextInt(256);
+        _eyesGreenValue = random.nextInt(256);
+        _eyesBlueValue = random.nextInt(256);
+        _hairRedValue = random.nextInt(256);
+        _hairGreenValue = random.nextInt(256);
+        _hairBlueValue = random.nextInt(256);
         hairStyle = random.nextInt(4);
-        Log.d("check", skinColor + " " + eyeColor + " " + hairColor + " " + hairStyle);
-    }
-
-    public void onDraw(Canvas canvas) {
-        //draws this Face object on a Canvas object
-    }
-
-    public void drawSkin(Canvas canvas) {
-        //use skinColor int
-    }
-
-    public void drawEyes(Canvas canvas) {
-        //use eyeColor int
-    }
-
-    public void drawHair(Canvas canvas) {
-        //use hairColor and hairStyle ints
-    }
-
-    public void drawOtherFeatures(Canvas canvas) {
-
+        //Log.d("check", skinColor + " " + eyeColor + " " + hairColor + " " + hairStyle);
     }
 
 }

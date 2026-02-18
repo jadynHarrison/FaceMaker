@@ -189,8 +189,8 @@
             android:orientation="vertical"
             android:padding="50dp">
 
-            <SurfaceView
-                android:id="@+id/surfaceView"
+            <facemakerver02.up.edu.FaceView
+                android:id="@+id/faceView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

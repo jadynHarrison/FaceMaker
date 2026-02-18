@@ -1,5 +1,9 @@
 package facemakerver02.up.edu;
 
+/**
+ * @author Jadyn Harrison
+ */
+
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
@@ -9,8 +13,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private FaceModel myModel;
-
     //values for the hairstyle spinner
     String[] hairstyles = {
             "Ponytail",
@@ -22,6 +24,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FaceView fv = findViewById(R.id.faceView);
+        /** External Citation
+         * Date: 17 February 2026
+         * Problem: Could not insert FaceView into activity_main.xml
+         * Resource: https://www.youtube.com/watch?v=EB9tIkB2SJI
+         * Solution: He walked through the steps
+         */
+        //create the controller object
+        FaceController fixYourFace = new FaceController(fv);
+
+
         //initialize the hair spinner
         Spinner hairSpinner = findViewById(R.id.spinnerHair);
         ArrayAdapter<String> hairAdapter = new ArrayAdapter<>(
@@ -30,14 +43,9 @@ public class MainActivity extends AppCompatActivity {
                 this.hairstyles);
         hairSpinner.setAdapter(hairAdapter);
 
-        //create the model object
-        myModel = new FaceModel();
-
-        //create the controller object
-        TextView redValue = findViewById(R.id.redValue);
-        TextView greenValue = findViewById(R.id.greenValue);
-        TextView blueValue = findViewById(R.id.blueValue);
-        FaceController fixYourFace = new FaceController(myModel, redValue, greenValue, blueValue);
+// I couldn't figure this out. I know we did it in class. I'll fix my work.
+//        TextView greenValue = findViewById(R.id.greenValue);
+//        TextView blueValue = findViewById(R.id.blueValue);
 
         //seekbar listeners
         SeekBar redBar = findViewById(R.id.redBar);
@@ -48,5 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         SeekBar blueBar = findViewById(R.id.blueBar);
         blueBar.setOnSeekBarChangeListener(fixYourFace);
+
+        TextView redValue = findViewById(R.id.redValue);
+        redValue.setText(fixYourFace.redProgress + "");
     }
 }
