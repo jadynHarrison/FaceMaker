@@ -10,11 +10,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
-import android.widget.TextView;
 
 public class FaceView extends SurfaceView {
     private FaceModel faceModelReference;
-
     Paint skinColor = new Paint();
     Paint hairColor = new Paint();
     Paint eyeColor = new Paint();
@@ -28,9 +26,9 @@ public class FaceView extends SurfaceView {
 
         setWillNotDraw(false);
 
-        skinColor.setColor(Color.rgb(faceModelReference._skinRedValue, faceModelReference._skinGreenValue,faceModelReference._skinBlueValue));
-        eyeColor.setColor(Color.rgb(faceModelReference._eyesRedValue, faceModelReference._eyesGreenValue,faceModelReference._eyesBlueValue));
-        hairColor.setColor(Color.rgb(faceModelReference._hairRedValue, faceModelReference._hairGreenValue,faceModelReference._hairBlueValue));
+        skinColor.setColor(Color.rgb(faceModelReference.getSkinRed(), faceModelReference.getSkinGreen(),faceModelReference.getSkinBlue()));
+        eyeColor.setColor(Color.rgb(faceModelReference.getEyesRed(), faceModelReference.getEyesGreen(),faceModelReference.getEyesBlue()));
+        hairColor.setColor(Color.rgb(faceModelReference.getHairRed(), faceModelReference.getHairGreen(),faceModelReference.getHairBlue()));
         pupil.setColor(Color.BLACK);
     }
 
@@ -41,31 +39,23 @@ public class FaceView extends SurfaceView {
     @Override
     public void onDraw(Canvas canvas) {
         //draws this Face object on a Canvas object
+        skinColor.setColor(Color.rgb(faceModelReference.getSkinRed(), faceModelReference.getSkinGreen(),faceModelReference.getSkinBlue()));
+        eyeColor.setColor(Color.rgb(faceModelReference.getEyesRed(), faceModelReference.getEyesGreen(),faceModelReference.getEyesBlue()));
+        hairColor.setColor(Color.rgb(faceModelReference.getHairRed(), faceModelReference.getHairGreen(),faceModelReference.getHairBlue()));
+        drawHair(canvas);
         drawSkin(canvas);
         drawEyes(canvas);
-        drawHair(canvas);
-
-        // THIS DOESN'T WORK. I'm still figuring it out. We did it in class.
-        // set the text views to match the RGB value
-//        TextView redTextView = findViewById(R.id.redValue);
-//        redTextView.setText(faceModelReference._redValue + "");
-//        TextView greenTextView = findViewById(R.id.greenValue);
-//        greenTextView.setText(faceModelReference._greenValue + "");
-
-//        TextView blueTextView = (TextView) findViewById(R.id.blueValue);
-//        if (blueTextView != null) {
-//            blueTextView.setText(faceModelReference._blueValue + "");
-//        }
-        //blueTextView.setText(faceModelReference._blueValue + "");
+        drawOther(canvas);
     }
 
     /**
      * draws the avatar's skin
-     * @param canvas
      */
     public void drawSkin(Canvas canvas) {
-        //use skinColor int
+        //head
         canvas.drawCircle(800, 650, 500, skinColor);
+
+        //ears
         canvas.drawCircle(250, 650, 100, skinColor);
         canvas.drawCircle(1350, 650, 100, skinColor);
     }
@@ -84,21 +74,59 @@ public class FaceView extends SurfaceView {
 
     /**
      * draws the avatar's skin
-     *
-     * CAVEAT: I haven't designed the hairstyles yet.
-     *
-     * @param canvas
      */
     public void drawHair(Canvas canvas) {
-        if (faceModelReference.hairStyle == 0) {
-            // hairstyle 1
-        } else if (faceModelReference.hairStyle == 1) {
-            // hairstyle 2
-        } else if (faceModelReference.hairStyle == 2) {
-            // hairstyle 3
-        } else {
-            // hairstyle 4
+        if (faceModelReference.getHairStyle() == 0) { // FIRST HAIRSTYLE
+            // hair drawn down
+            canvas.drawRect(300, 650, 1300, 1200, hairColor);
+            canvas.drawOval(300, 50, 1300, 1000, hairColor);
+        } else if (faceModelReference.getHairStyle() == 1) { // SECOND HAIRSTYLE
+        // draws left braid
+        canvas.drawCircle(325, 750, 100, hairColor);
+        canvas.drawCircle(325, 900, 100, hairColor);
+        canvas.drawCircle(325, 1025, 100, hairColor);
+        canvas.drawCircle(325, 1150, 100, hairColor);
+        canvas.drawCircle(325, 1300, 100, hairColor);
+        // top hair
+        canvas.drawCircle(300, 550, 100, hairColor);
+        canvas.drawCircle(325, 400, 100, hairColor);
+        canvas.drawCircle(450, 260, 100, hairColor);
+        canvas.drawCircle(585, 170, 100, hairColor);
+        canvas.drawCircle(700, 120, 100, hairColor);
+        canvas.drawCircle(850, 120, 100, hairColor);
+        canvas.drawCircle(1000, 170, 100, hairColor);
+        canvas.drawCircle(1150, 260, 100, hairColor);
+        canvas.drawCircle(1250, 400, 100, hairColor);
+        canvas.drawCircle(1300, 550, 100, hairColor);
+        // draws right braid
+        canvas.drawCircle(1275, 750, 100, hairColor);
+        canvas.drawCircle(1275, 900, 100, hairColor);
+        canvas.drawCircle(1275, 1025, 100, hairColor);
+        canvas.drawCircle(1275, 1150, 100, hairColor);
+        canvas.drawCircle(1275, 1300, 100, hairColor);
+        } else if (faceModelReference.getHairStyle() == 2) { // HAIRSTYLE THREE
+            canvas.drawCircle(375, 1050, 200, hairColor);
         }
+    }
+
+    /**
+     * Draws hair features that must be layered above the skin and eyes. Also includes the smile.
+     * @param canvas
+     */
+    public void drawOther (Canvas canvas) {
+        // hair features
+        if (faceModelReference.getHairStyle() == 0) {
+            // adds bangs to HAIRSTYLE ONE
+            canvas.drawRect(500, 150, 1100, 500, hairColor);
+        } else if (faceModelReference.getHairStyle() == 2) {
+            // layers the hair over the face, HAIRSTYLE 3
+            canvas.drawArc(200, 60, 900, 650, 135, 180, true, hairColor);
+            canvas.drawArc(700, 60, 1400, 650, 225, 180, true, hairColor);
+        }
+
+        // draws smile
+        canvas.drawArc(500, 650, 1110, 1100, 0, 180, true, pupil);
+
     }
 
     public FaceModel grantReferenceAccess() {
